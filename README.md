@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Insight Dashboard
+
+A responsive web application that tracks a stock portfolio of Indian equities, fetches live market prices from Yahoo Finance, retrieves P/E ratios and earnings from Google Finance, and recalculates portfolio returns dynamically every 15 seconds.
+
+## Tech Stack
+
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- Recharts
+- Node.js server routes
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Node.js 18.18 or higher (Node 20+ recommended).
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Portfolio Data
 
-To learn more about Next.js, take a look at the following resources:
+The portfolio contains 26 active stock holdings across 6 sectors (Financial, Tech, Consumer, Power, Pipe, Others) based directly on the provided Excel workbook:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Total Portfolio Investment: Rs 15,43,060.00
+- All purchase prices, quantities, stock names, and exchange codes are preserved exactly from the source data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Financial Data Strategy
 
-## Deploy on Vercel
+- **Yahoo Finance**: Used for Current Market Price (CMP), daily changes, and 52-week ranges. Requests are batched into a single query (`yf.quote(symbols)`) on the server and cached in memory for 15 seconds.
+- **Google Finance**: Used for P/E ratio and latest earnings per share (EPS). Because Google Finance does not provide a public REST API, data is retrieved via a dedicated server-side scraping module with regex parsing and a 30-minute in-memory cache.
+- **No Direct Browser Calls**: All financial data queries go through Next.js server routes (`/api/portfolio`, `/api/market-data`, `/api/portfolio/[symbol]`). Client browser code never calls external APIs directly.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Auto-Refresh & Performance
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The client polls `/api/market-data` every 15 seconds to fetch updated prices.
+- Present Value (`CMP x Quantity`) and Gain/Loss are recalculated on the client to avoid re-fetching static holding metadata.
+- Mutex lock guards prevent overlapping refresh requests if a network request takes longer than 15 seconds.
+- Missing data fields gracefully fall back to an "Unavailable" state rather than failing the whole table.
+
+## Deployment
+
+The application is built for standard Next.js deployment on Vercel:
+
+1. Push to GitHub.
+2. Import repository into Vercel.
+3. Deploy using default settings (`next build`).
