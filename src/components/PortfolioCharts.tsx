@@ -21,13 +21,13 @@ interface PortfolioChartsProps {
 }
 
 const SECTOR_COLORS = [
-  "#6366f1",
-  "#3b82f6",
-  "#10b981",
-  "#f59e0b",
-  "#8b5cf6",
-  "#ec4899",
-  "#14b8a6"
+  "#38bdf8",
+  "#818cf8",
+  "#34d399",
+  "#fbbf24",
+  "#a78bfa",
+  "#94a3b8",
+  "#2dd4bf"
 ];
 
 export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
@@ -46,10 +46,10 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
   }));
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+    <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 sm:p-5 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div>
-          <h2 className="text-base font-bold text-white tracking-tight">
+          <h2 className="text-sm font-semibold text-white tracking-tight">
             Portfolio Visualizations
           </h2>
           <p className="text-xs text-slate-400">
@@ -57,31 +57,31 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
           </p>
         </div>
 
-        <div className="flex items-center bg-slate-800/80 p-1 rounded-lg border border-slate-700/60 self-start sm:self-auto">
+        <div className="flex items-center bg-slate-800 p-0.5 rounded-md border border-slate-700">
           <button
             onClick={() => setActiveTab("allocation")}
-            className={`px-3 py-1 text-xs font-medium rounded-md transition cursor-pointer ${
+            className={`px-2.5 py-1 text-xs font-medium rounded transition cursor-pointer ${
               activeTab === "allocation"
-                ? "bg-indigo-600 text-white shadow-sm"
+                ? "bg-slate-700 text-white"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >
-            Sector Allocation
+            Allocation
           </button>
           <button
             onClick={() => setActiveTab("comparison")}
-            className={`px-3 py-1 text-xs font-medium rounded-md transition cursor-pointer ${
+            className={`px-2.5 py-1 text-xs font-medium rounded transition cursor-pointer ${
               activeTab === "comparison"
-                ? "bg-indigo-600 text-white shadow-sm"
+                ? "bg-slate-700 text-white"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >
-            Investment vs Value
+            Cost vs Value
           </button>
         </div>
       </div>
 
-      <div className="h-72 w-full">
+      <div className="h-64 sm:h-72 w-full">
         {activeTab === "allocation" ? (
           <ResponsiveContainer width="100%" height="100%">
             <RechartsPieChart>
@@ -91,9 +91,9 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
                 nameKey="name"
                 cx="50%"
                 cy="50%"
-                innerRadius={65}
-                outerRadius={95}
-                paddingAngle={4}
+                innerRadius={55}
+                outerRadius={85}
+                paddingAngle={3}
               >
                 {pieData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} stroke="#0f172a" strokeWidth={2} />
@@ -107,7 +107,7 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
                 contentStyle={{
                   backgroundColor: "#0f172a",
                   borderColor: "#334155",
-                  borderRadius: "0.5rem",
+                  borderRadius: "0.375rem",
                   color: "#f8fafc",
                   fontSize: "12px"
                 }}
@@ -119,7 +119,7 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
           </ResponsiveContainer>
         ) : (
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={barData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
+            <BarChart data={barData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
               <XAxis
                 dataKey="sector"
                 stroke="#64748b"
@@ -142,7 +142,7 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
                 contentStyle={{
                   backgroundColor: "#0f172a",
                   borderColor: "#334155",
-                  borderRadius: "0.5rem",
+                  borderRadius: "0.375rem",
                   color: "#f8fafc",
                   fontSize: "12px"
                 }}
@@ -150,8 +150,8 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
               <Legend
                 formatter={(val) => <span className="text-xs text-slate-300 font-medium">{val}</span>}
               />
-              <Bar dataKey="Investment" fill="#4f46e5" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Present Value" fill="#10b981" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Investment" fill="#475569" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="Present Value" fill="#10b981" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         )}

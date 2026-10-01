@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dynamic Portfolio Dashboard | Real-Time Market Analytics",
+  title: "Portfolio Insight Dashboard",
   description:
     "Real-time Indian stock portfolio dashboard tracking CMP via Yahoo Finance and P/E ratio and latest earnings via Google Finance.",
 };

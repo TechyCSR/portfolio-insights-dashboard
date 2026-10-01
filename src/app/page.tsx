@@ -232,7 +232,7 @@ export default function DashboardPage() {
   }, [isLoading, error, refreshMarketData]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans antialiased selection:bg-slate-800 selection:text-white">
       <Navbar
         lastUpdated={lastUpdated}
         isRefreshing={isRefreshing}
@@ -270,14 +270,17 @@ export default function DashboardPage() {
       </main>
 
       <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 space-y-2">
-          <p>
-            Portfolio data mapped directly from source Excel holdings. CMP fetched via Yahoo Finance. P/E and Earnings sourced via Google Finance.
-          </p>
-          <p className="text-[11px] text-slate-600">
-            Auto-refreshes every 15 seconds with server-side batching, rate-limiting safeguards, and in-memory TTL caching.
-          </p>
-        </div>
+        <p>
+          Developed by{" "}
+          <a
+            href="https://techycsr.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-slate-200 underline underline-offset-4 transition"
+          >
+            @Techycsr
+          </a>
+        </p>
       </footer>
 
       <StockModal
