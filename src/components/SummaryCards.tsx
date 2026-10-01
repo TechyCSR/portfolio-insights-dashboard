@@ -11,57 +11,57 @@ export function SummaryCards({ summary }: SummaryCardsProps) {
   const isProfit = summary.totalGainLoss >= 0;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
-      <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 shadow-sm">
-        <span className="text-xs font-medium text-slate-400 block">Total Investment</span>
-        <div className="text-xl font-bold text-white tracking-tight mt-1.5 tabular-nums">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+      <div className="bg-white border border-black rounded-lg p-4 shadow-xs">
+        <span className="text-xs text-neutral-600 block font-medium">Total Investment</span>
+        <div className="text-xl font-bold text-neutral-900 tracking-tight mt-1 tabular-nums">
           {formatCurrency(summary.totalInvestment)}
         </div>
-        <p className="text-[11px] text-slate-500 mt-1">Cost basis across all 26 stocks</p>
+        <p className="text-[11px] text-neutral-500 mt-1">Cost basis for 26 stocks</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 shadow-sm">
-        <span className="text-xs font-medium text-slate-400 block">Current Portfolio Value</span>
-        <div className="text-xl font-bold text-white tracking-tight mt-1.5 tabular-nums">
+      <div className="bg-white border border-black rounded-lg p-4 shadow-xs">
+        <span className="text-xs text-neutral-600 block font-medium">Current Valuation</span>
+        <div className="text-xl font-bold text-neutral-900 tracking-tight mt-1 tabular-nums">
           {formatCurrency(summary.currentPortfolioValue)}
         </div>
-        <p className="text-[11px] text-slate-500 mt-1">Live market valuation</p>
+        <p className="text-[11px] text-neutral-500 mt-1">Live market value</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 shadow-sm">
-        <span className="text-xs font-medium text-slate-400 block">Total Gain / Loss</span>
+      <div className="bg-white border border-black rounded-lg p-4 shadow-xs">
+        <span className="text-xs text-neutral-600 block font-medium">Total Gain / Loss</span>
         <div
-          className={`text-xl font-bold tracking-tight mt-1.5 tabular-nums ${
-            isProfit ? "text-emerald-400" : "text-rose-400"
+          className={`text-xl font-bold tracking-tight mt-1 tabular-nums ${
+            isProfit ? "text-emerald-700" : "text-rose-700"
           }`}
         >
           {formatCurrency(summary.totalGainLoss)}
         </div>
-        <p className="text-[11px] text-slate-500 mt-1">Unrealized net P&amp;L</p>
+        <p className="text-[11px] text-neutral-500 mt-1">Unrealized net P&amp;L</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 shadow-sm">
-        <span className="text-xs font-medium text-slate-400 block">Overall Return</span>
+      <div className="bg-white border border-black rounded-lg p-4 shadow-xs">
+        <span className="text-xs text-neutral-600 block font-medium">Overall Return</span>
         <div
-          className={`text-xl font-bold tracking-tight mt-1.5 tabular-nums ${
-            isProfit ? "text-emerald-400" : "text-rose-400"
+          className={`text-xl font-bold tracking-tight mt-1 tabular-nums ${
+            isProfit ? "text-emerald-700" : "text-rose-700"
           }`}
         >
           {formatPercentage(summary.overallReturnPercentage)}
         </div>
-        <p className="text-[11px] text-slate-500 mt-1">Cumulative return percentage</p>
+        <p className="text-[11px] text-neutral-500 mt-1">Cumulative return percentage</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 shadow-sm">
-        <span className="text-xs font-medium text-slate-400 block">Number of Holdings</span>
-        <div className="text-xl font-bold text-white tracking-tight mt-1.5 tabular-nums">
-          {summary.totalHoldings}
+      <div className="bg-white border border-black rounded-lg p-4 shadow-xs">
+        <span className="text-xs text-neutral-600 block font-medium">Holdings</span>
+        <div className="text-xl font-bold text-neutral-900 tracking-tight mt-1 tabular-nums">
+          {summary.totalHoldings} stocks
         </div>
-        <div className="flex items-center space-x-2 text-[11px] text-slate-400 mt-1">
-          <span className="text-emerald-400 font-medium">{summary.gainersCount} up</span>
-          <span>•</span>
-          <span className="text-rose-400 font-medium">{summary.losersCount} down</span>
-        </div>
+        <p className="text-[11px] text-neutral-500 mt-1">
+          <span className="text-emerald-700 font-semibold">{summary.gainersCount} up</span>
+          {" "}•{" "}
+          <span className="text-rose-700 font-semibold">{summary.losersCount} down</span>
+        </p>
       </div>
     </div>
   );

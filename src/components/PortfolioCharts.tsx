@@ -21,13 +21,12 @@ interface PortfolioChartsProps {
 }
 
 const SECTOR_COLORS = [
-  "#38bdf8",
-  "#818cf8",
-  "#34d399",
-  "#fbbf24",
-  "#a78bfa",
-  "#94a3b8",
-  "#2dd4bf"
+  "#2563eb",
+  "#475569",
+  "#059669",
+  "#0284c7",
+  "#7c3aed",
+  "#64748b"
 ];
 
 export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
@@ -46,34 +45,34 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
   }));
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 sm:p-5 shadow-sm">
+    <div className="bg-white border border-black rounded-lg p-4 sm:p-5 shadow-xs">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div>
-          <h2 className="text-sm font-semibold text-white tracking-tight">
+          <h2 className="text-sm font-semibold text-neutral-900 tracking-tight">
             Portfolio Visualizations
           </h2>
-          <p className="text-xs text-slate-400">
-            Sector-level weight distribution and valuation performance
+          <p className="text-xs text-neutral-500">
+            Sector weights and cost vs value comparison
           </p>
         </div>
 
-        <div className="flex items-center bg-slate-800 p-0.5 rounded-md border border-slate-700">
+        <div className="flex items-center bg-neutral-100 p-0.5 rounded border border-gray-200">
           <button
             onClick={() => setActiveTab("allocation")}
-            className={`px-2.5 py-1 text-xs font-medium rounded transition cursor-pointer ${
+            className={`px-2.5 py-1 text-xs font-semibold rounded transition cursor-pointer ${
               activeTab === "allocation"
-                ? "bg-slate-700 text-white"
-                : "text-slate-400 hover:text-slate-200"
+                ? "bg-black text-white"
+                : "text-neutral-700 hover:text-black"
             }`}
           >
             Allocation
           </button>
           <button
             onClick={() => setActiveTab("comparison")}
-            className={`px-2.5 py-1 text-xs font-medium rounded transition cursor-pointer ${
+            className={`px-2.5 py-1 text-xs font-semibold rounded transition cursor-pointer ${
               activeTab === "comparison"
-                ? "bg-slate-700 text-white"
-                : "text-slate-400 hover:text-slate-200"
+                ? "bg-black text-white"
+                : "text-neutral-700 hover:text-black"
             }`}
           >
             Cost vs Value
@@ -96,7 +95,7 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
                 paddingAngle={3}
               >
                 {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} stroke="#0f172a" strokeWidth={2} />
+                  <Cell key={`cell-${index}`} fill={entry.color} stroke="#ffffff" strokeWidth={2} />
                 ))}
               </Pie>
               <Tooltip
@@ -105,15 +104,17 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
                   "Investment"
                 ]}
                 contentStyle={{
-                  backgroundColor: "#0f172a",
-                  borderColor: "#334155",
-                  borderRadius: "0.375rem",
-                  color: "#f8fafc",
-                  fontSize: "12px"
+                  backgroundColor: "#ffffff",
+                  borderColor: "#000000",
+                  borderWidth: "1px",
+                  borderRadius: "0.25rem",
+                  color: "#0f172a",
+                  fontSize: "12px",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.08)"
                 }}
               />
               <Legend
-                formatter={(val) => <span className="text-xs text-slate-300 font-medium">{val}</span>}
+                formatter={(val) => <span className="text-xs text-neutral-800 font-medium">{val}</span>}
               />
             </RechartsPieChart>
           </ResponsiveContainer>
@@ -122,16 +123,16 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
             <BarChart data={barData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
               <XAxis
                 dataKey="sector"
-                stroke="#64748b"
+                stroke="#525252"
                 fontSize={11}
                 tickLine={false}
-                axisLine={{ stroke: "#334155" }}
+                axisLine={{ stroke: "#000000" }}
               />
               <YAxis
-                stroke="#64748b"
+                stroke="#525252"
                 fontSize={11}
                 tickLine={false}
-                axisLine={{ stroke: "#334155" }}
+                axisLine={{ stroke: "#000000" }}
                 tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}k`}
               />
               <Tooltip
@@ -140,18 +141,20 @@ export function PortfolioCharts({ sectors }: PortfolioChartsProps) {
                   ""
                 ]}
                 contentStyle={{
-                  backgroundColor: "#0f172a",
-                  borderColor: "#334155",
-                  borderRadius: "0.375rem",
-                  color: "#f8fafc",
-                  fontSize: "12px"
+                  backgroundColor: "#ffffff",
+                  borderColor: "#000000",
+                  borderWidth: "1px",
+                  borderRadius: "0.25rem",
+                  color: "#0f172a",
+                  fontSize: "12px",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.08)"
                 }}
               />
               <Legend
-                formatter={(val) => <span className="text-xs text-slate-300 font-medium">{val}</span>}
+                formatter={(val) => <span className="text-xs text-neutral-800 font-medium">{val}</span>}
               />
-              <Bar dataKey="Investment" fill="#475569" radius={[3, 3, 0, 0]} />
-              <Bar dataKey="Present Value" fill="#10b981" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="Investment" fill="#525252" radius={[2, 2, 0, 0]} />
+              <Bar dataKey="Present Value" fill="#10b981" radius={[2, 2, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         )}

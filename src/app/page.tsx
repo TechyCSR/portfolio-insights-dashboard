@@ -232,7 +232,7 @@ export default function DashboardPage() {
   }, [isLoading, error, refreshMarketData]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans antialiased selection:bg-slate-800 selection:text-white">
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col font-sans antialiased">
       <Navbar
         lastUpdated={lastUpdated}
         isRefreshing={isRefreshing}
@@ -240,7 +240,7 @@ export default function DashboardPage() {
         onRefresh={refreshMarketData}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 xl:px-10 py-6 space-y-6">
         {isLoading ? (
           <LoadingSkeleton />
         ) : error ? (
@@ -269,14 +269,14 @@ export default function DashboardPage() {
         )}
       </main>
 
-      <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-500">
+      <footer className="border-t border-gray-200 bg-white py-6 text-center text-xs text-gray-500">
         <p>
           Developed by{" "}
           <a
             href="https://techycsr.dev"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-slate-400 hover:text-slate-200 underline underline-offset-4 transition"
+            className="text-gray-700 hover:text-gray-900 underline underline-offset-4 transition"
           >
             @Techycsr
           </a>
